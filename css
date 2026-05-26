@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+#app {
+  max-width: 600px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+button {
+  padding: 12px;
+  margin: 8px 0;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:hover { background: #2563eb; }
+#options button {
+  background: #e5e7eb;
+  color: #111;
+  text-align: left;
+}
+#options button.selected {
+  background: #3b82f6;
+  color: white;
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+#timer { color: red; }
+#review { margin-top: 20px; }
+.review-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-left: 4px solid #ccc;
+}
+.correct { border-color: green; }
+.wrong { border-color: red; }
+h2, h3 { text-align: center; }
