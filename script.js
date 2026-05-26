@@ -12,4 +12,11 @@ english: [
     {q: "He is good ______ Mathematics.", options: ["in", "at", "on", "for"], answer: 1, explanation: "Good AT is correct collocation."},
     {q: "The opposite of 'Advance' is ______.", options: ["Progress", "Retreat", "Move", "Go"], answer: 1, explanation: "Retreat means to go back."},
     {q: "Choose the word that is nearest in meaning to 'Huge'.", options: ["Tiny", "Small", "Large", "Enormous"], answer: 3, explanation: "Enormous is closest to huge."},
-    {q: "She said, '
+    {q: "She said, 'I am coming.' Change to indirect speech.", options: ["She said that she was coming.", "She said that I am coming.", "She said that she is coming.", "She said that I was coming."], answer: 0, explanation: "Tense shifts back in reported speech."},
+    {q: "Choose the correct question tag: He came late, ______?", options: ["didn't he", "did he", "doesn't he", "does he"], answer: 0, explanation: "Positive statement takes negative tag."},
+    {q: "The students ______ the answer before the teacher came.", options: ["find", "found", "had found", "have found"], answer: 2, explanation: "Past perfect for action before another past action."},
+    {q: "Identify the figure of speech: 'Time is money'.", options: ["Simile", "Metaphor", "Personification", "Hyperbole"], answer: 1, explanation: "Direct comparison without 'like' or 'as'."},
+    {q: "Choose the correct spelling.", options: ["Neccessary", "Necessary", "Necessarry", "Necesary"], answer: 1, explanation: "One 'c', double 's'."},
+    {q: "He ______ to school every day.", options: ["go", "goes", "going", "gone"], answer: 1, explanation: "He takes 'goes' in present simple."},
+    {q: "What part of speech is 'Quickly'?", options: ["Noun", "Adjective", "Adverb", "Verb"], answer: 2, explanation: "Quickly modifies a verb, so it's an adverb."}
+  ],
