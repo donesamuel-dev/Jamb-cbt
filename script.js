@@ -1,3 +1,5 @@
+const PAYSTACK_PUBLIC_KEY = 'pk_test_b313b073963e4a01e440563c4fbe70a6e0b5ef40';
+
 const questionBank = {
   english: [
     {q: "He is ______ intelligent to fail the test.", options: ["too", "so", "very", "quite"], answer: 0, explanation: "'Too intelligent to fail' means his intelligence prevents failure."},
@@ -38,15 +40,40 @@ let timeLeft = 3600;
 let timer;
 
 function startTest(subject) {
+  if(!localStorage.getItem('paid')){
+    if(confirm('Unlock all questions for ₦0?')){
+      payToUnlock();
+    }
+    return;
+  }
+
   questions = [...questionBank[subject]];
   questions.sort(() => Math.random() - 0.5);
-
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("quiz-screen").style.display = "block";
-
   current = 0; score = 0; userAnswers = [];
   loadQuestion();
   startTimer();
+}
+
+function payToUnlock() {
+  let email = prompt("Enter your email for receipt:");
+  if(!email) return;
+
+  let handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: email,
+    amount: 0, // Change to 50000 for ₦500 when ready
+    currency: 'NGN',
+    ref: 'JAMB_' + Math.floor(Math.random() * 1000000),
+    callback: function(response){
+      alert('Access granted!');
+      localStorage.setItem('paid', 'true');
+      location.reload();
+    },
+    onClose: function(){}
+  });
+  handler.openIframe();
 }
 
 function loadQuestion() {
@@ -54,11 +81,9 @@ function loadQuestion() {
     endTest();
     return;
   }
-
   let q = questions[current];
   document.getElementById("question").innerText = q.q;
   document.getElementById("q-counter").innerText = `Q${current+1}/${questions.length}`;
-
   let optionsDiv = document.getElementById("options");
   optionsDiv.innerHTML = "";
   q.options.forEach((opt, i) => {
@@ -99,26 +124,8 @@ function endTest() {
   document.getElementById("score").innerText = `Score: ${score}/${questions.length} - ${Math.round(score/questions.length*100)}%`;
 }
 
-function reviewAnswers() {
-  let reviewDiv = document.getElementById("review");
-  reviewDiv.style.display = "block";
-  reviewDiv.innerHTML = "";
-  questions.forEach((q, i) => {
-    let userAns = userAnswers[i];
-    let isCorrect = userAns === q.answer;
-    reviewDiv.innerHTML += `
-      <div class="review-item ${isCorrect?'correct':'wrong'}">
-        <p><b>Q${i+1}:</b> ${q.q}</p>
-        <p>Your answer: ${q.options[userAns] || "Not answered"}</p>
-        <p>Correct answer: ${q.options[q.answer]}</p>
-        <p><i>${q.explanation}</i></p>
-      </div>
-    `;
-  });
-}
-
 function restart() {
   timeLeft = 3600;
   document.getElementById("result-screen").style.display = "none";
   document.getElementById("start-screen").style.display = "block";
-     }
+    }
