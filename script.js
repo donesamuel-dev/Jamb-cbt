@@ -23,13 +23,8 @@ const questionBank = {
     {q: "He ______ to school every day.", options: ["go", "goes", "going", "gone"], answer: 1, explanation: "He takes 'goes' in present simple."},
     {q: "What part of speech is 'Quickly'?", options: ["Noun", "Adjective", "Adverb", "Verb"], answer: 2, explanation: "Quickly modifies a verb, so it's an adverb."}
   ],
-  maths: [
-    {q: "2 + 2 x 2 =?", options: ["6", "8", "4", "10"], answer: 0, explanation: "BODMAS: 2 x 2 = 4, then 2 + 4 = 6."},
-    {q: "What is 15% of 200?", options: ["30", "25", "20", "35"], answer: 0, explanation: "0.15 x 200 = 30."}
-  ],
-  physics: [
-    {q: "Unit of Force is:", options: ["Joule", "Watt", "Newton", "Pascal"], answer: 2, explanation: "Force is measured in Newtons."}
-  ]
+  maths: [{q: "2 + 2 x 2 =?", options: ["6", "8", "4", "10"], answer: 0, explanation: "BODMAS: 2 x 2 = 4, then 2 + 4 = 6."}],
+  physics: [{q: "Unit of Force is:", options: ["Joule", "Watt", "Newton", "Pascal"], answer: 2, explanation: "Force is measured in Newtons."}]
 };
 
 let questions = [];
@@ -41,9 +36,7 @@ let timer;
 
 function startTest(subject) {
   if(!localStorage.getItem('paid')){
-    if(confirm('Unlock all questions for ₦0?')){
-      payToUnlock();
-    }
+    payToUnlock();
     return;
   }
 
@@ -63,7 +56,7 @@ function payToUnlock() {
   let handler = PaystackPop.setup({
     key: PAYSTACK_PUBLIC_KEY,
     email: email,
-    amount: 0, // Change to 50000 for ₦500 when ready
+    amount: 100, // ₦1. Use 50000 for ₦500 when ready
     currency: 'NGN',
     ref: 'JAMB_' + Math.floor(Math.random() * 1000000),
     callback: function(response){
@@ -128,4 +121,4 @@ function restart() {
   timeLeft = 3600;
   document.getElementById("result-screen").style.display = "none";
   document.getElementById("start-screen").style.display = "block";
-    }
+                                                          }
