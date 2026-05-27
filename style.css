@@ -1,17 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f0f6ff;
+  color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  background: #fff;
+  width: 100%;
+  max-width: 700px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 56, 120, 0.15);
+  padding: 30px;
+}
+
+h1, h2, h3 {
+  color: #0d47a1;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+button {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: #0d47a1;
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Mode Select */
 .mode-select {
   display: flex;
   gap: 10px;
+  justify-content: center;
   margin-bottom: 20px;
 }
-.mode-select button.active {
-  background: #4CAF50;
-  color: white;
+
+.mode-select button {
+  flex: 1;
+  background: #e3f2fd;
+  color: #1976d2;
+  font-weight: 600;
 }
-.tutorial {
+
+.mode-select button.active {
+  background: #1976d2;
+  color: #fff;
+}
+
+/* Subject Buttons */
+.subject-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Quiz Header */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e3f2fd;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #0d47a1;
+}
+
+#lives {
+  color: #d32f2f;
+}
+
+/* Question & Options */
+#question {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #212121;
+}
+
+#options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#options button {
+  background: #f5f9ff;
+  color: #212121;
+  border: 2px solid #e3f2fd;
+  text-align: left;
+}
+
+#options button:hover {
+  border-color: #1976d2;
+}
+
+#options button.selected {
+  background: #1976d2;
+  color: #fff;
+  border-color: #1976d2;
+}
+
+/* Fun Box */
+.fun-box {
   margin-top: 30px;
+  padding: 20px;
+  background: #e3f2fd;
+  border-left: 5px solid #1976d2;
+  border-radius: 8px;
   text-align: center;
 }
-#lives {
-  color: red;
-  font-weight: bold;
+
+.fun-box h3 {
+  color: #0d47a1;
+  margin-bottom: 8px;
 }
+
+.fun-box p {
+  color: #333;
+  font-size: 15px;
+}
+
+/* Result Screen */
+#result-screen h1 {
+  color: #0d47a1;
+}
+#result-screen h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+  button {
+    font-size: 15px;
+    padding: 10px 14px;
+  }
+  }
