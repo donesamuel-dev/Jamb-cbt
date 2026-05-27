@@ -1,5 +1,3 @@
-const PAYSTACK_PUBLIC_KEY = 'pk_test_b313b073963e4a01e440563c4fbe70a6e0b5ef40';
-
 const questionBank = {
   english: [
     {q: "He is ______ intelligent to fail the test.", options: ["too", "so", "very", "quite"], answer: 0, explanation: "'Too intelligent to fail' means his intelligence prevents failure."},
@@ -35,11 +33,6 @@ let timeLeft = 3600;
 let timer;
 
 function startTest(subject) {
-  if(!localStorage.getItem('paid')){
-    payToUnlock();
-    return;
-  }
-
   questions = [...questionBank[subject]];
   questions.sort(() => Math.random() - 0.5);
   document.getElementById("start-screen").style.display = "none";
@@ -47,26 +40,6 @@ function startTest(subject) {
   current = 0; score = 0; userAnswers = [];
   loadQuestion();
   startTimer();
-}
-
-function payToUnlock() {
-  let email = prompt("Enter your email for receipt:");
-  if(!email) return;
-
-  let handler = PaystackPop.setup({
-    key: PAYSTACK_PUBLIC_KEY,
-    email: email,
-    amount: 100, // ₦1. Use 50000 for ₦500 when ready
-    currency: 'NGN',
-    ref: 'JAMB_' + Math.floor(Math.random() * 1000000),
-    callback: function(response){
-      alert('Access granted!');
-      localStorage.setItem('paid', 'true');
-      location.reload();
-    },
-    onClose: function(){}
-  });
-  handler.openIframe();
 }
 
 function loadQuestion() {
@@ -121,4 +94,4 @@ function restart() {
   timeLeft = 3600;
   document.getElementById("result-screen").style.display = "none";
   document.getElementById("start-screen").style.display = "block";
-                                                          }
+}
