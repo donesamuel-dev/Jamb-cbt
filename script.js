@@ -29,12 +29,31 @@ let questions = [];
 let current = 0;
 let score = 0;
 let userAnswers = [];
+let mode = 'practice'; // practice or challenge
 let timeLeft = 3600;
+let lives = 3;
 let timer;
+
+function setMode(selectedMode) {
+  mode = selectedMode;
+  document.querySelectorAll('.mode-select button').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
 
 function startTest(subject) {
   questions = [...questionBank[subject]];
-  questions.sort(() => Math.random() - 0.5);
+  questions.sort(() => Math.random() - 0.5).slice(0, 20);
+
+  if (mode === 'challenge') {
+    timeLeft = 1800; // 30 min
+    lives = 3;
+    document.getElementById('lives').style.display = 'inline';
+  } else {
+    timeLeft = 3600; // 60 min
+    lives = 999;
+    document.getElementById('lives').style.display = 'none';
+  }
+
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("quiz-screen").style.display = "block";
   current = 0; score = 0; userAnswers = [];
@@ -43,13 +62,16 @@ function startTest(subject) {
 }
 
 function loadQuestion() {
-  if (current >= questions.length) {
+  if (current >= questions.length || lives <= 0) {
     endTest();
     return;
   }
+
   let q = questions[current];
   document.getElementById("question").innerText = q.q;
   document.getElementById("q-counter").innerText = `Q${current+1}/${questions.length}`;
+  document.getElementById("lives").innerText = `Lives: ${lives}`;
+
   let optionsDiv = document.getElementById("options");
   optionsDiv.innerHTML = "";
   q.options.forEach((opt, i) => {
@@ -68,12 +90,20 @@ function nextQuestion() {
     alert("Please select an answer");
     return;
   }
-  if (userAnswers[current] === questions[current].answer) score++;
+
+  if (userAnswers[current] === questions[current].answer) {
+    score++;
+  } else if (mode === 'challenge') {
+    lives--;
+    alert(`Wrong! ${lives} lives left.`);
+  }
+
   current++;
   loadQuestion();
 }
 
 function startTimer() {
+  clearInterval(timer);
   timer = setInterval(() => {
     timeLeft--;
     let min = Math.floor(timeLeft/60);
@@ -92,6 +122,7 @@ function endTest() {
 
 function restart() {
   timeLeft = 3600;
+  lives = 3;
   document.getElementById("result-screen").style.display = "none";
   document.getElementById("start-screen").style.display = "block";
-}
+    }
